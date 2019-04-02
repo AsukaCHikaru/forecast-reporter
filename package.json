@@ -4,7 +4,7 @@
   "description": "A custom reporter for Mocha.js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -t 60000 --reporter forecast.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/AsukaCHikaru/forecast-reporter/issues"
   },
-  "homepage": "https://github.com/AsukaCHikaru/forecast-reporter#readme"
+  "homepage": "https://github.com/AsukaCHikaru/forecast-reporter#readme",
+  "dependencies": {
+    "mocha": "^6.0.2"
+  }
 }
