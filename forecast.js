@@ -10,33 +10,41 @@ function Forecast(runner) {
        passed: 0,
        failed: 0,
    };
+   var indents = 0;
+   function indent() {
+       return Array(indents).join('  ');
+   }
 
    runner.on('start', () => {
        console.log(`TEST START (${tests.total} test cases)`);
    });
 
-    runner.on('suite', (suite) => {
-        console.log(suite.title);
+    runner.on('suite', (suite) => {        
+        console.log(indent() + suite.title);
+        indents++;
+    });
+    runner.on('suite end', () => {
+        indents--;
     });
 
     runner.on('test', (test) => {
-        console.log(test.title);
+        console.log(indent() + test.title);
     });
 
     runner.on('pass', (test) => {
         tests.passed++;
-        console.log(`> Pass (${test.duration/1000}s)`);
+        console.log(indent() + `> Pass (${test.duration/1000}s)\n`);           
     });
 
     runner.on('fail', (test) => {
         tests.failed++;
-        console.log(`> Fail (${test.duration/1000}s)`);
+        console.log(indent() + `> Fail (${test.duration/1000}s)\n`);
     });
 
     runner.on('end', () => {
         let passRate = (tests.passed / tests.total)*100;
         console.log('TEST ENDED');
-        console.log(`${tests.passed}/${tests.total} passed (${passRate}% pass rate)`);
+        console.log(`${tests.passed}/${tests.total} passed (${passRate}% pass rate)\n`);
     });
 }
 
